@@ -1,0 +1,4 @@
+*.pdf
+Data/preprocessed_data
+*.csv
+*.xlsx
