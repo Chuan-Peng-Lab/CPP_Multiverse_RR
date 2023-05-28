@@ -1,4 +1,4 @@
 *.pdf
-Data/preprocessed_data
+Data
 *.csv
 *.xlsx
