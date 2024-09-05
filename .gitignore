@@ -1,6 +1,9 @@
 *.pdf
-Data/
-8_Temp/
-*.csv
 *.xlsx
 *.fif
+
+
+Data/
+
+8_Temp/
+6_Report/2023_Macau_CCBC/
