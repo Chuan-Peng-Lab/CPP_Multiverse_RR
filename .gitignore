@@ -1,4 +1,6 @@
 *.pdf
-Data
+Data/
+8_Temp/
 *.csv
 *.xlsx
+*.fif
