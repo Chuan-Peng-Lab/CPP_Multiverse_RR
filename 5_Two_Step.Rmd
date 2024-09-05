@@ -1,0 +1,97 @@
+---
+title: "CPP_multiverse_RR"
+author: yikang Liu
+output: html_notebook
+---
+This script uses the traditional two-step method to compare the correlation 
+
+between CPP features (slope, amplitude, peak amplitude) and the drift rate (v).
+
+```{r}
+# Load required packages using pacman
+require(pacman)
+p_load("boot", "tidyverse", "reshape2", "brms", "bruceR", "BayesFactor", "nlme", "lme4", "patchwork")
+set.seed(123)  # Set a random seed for reproducibility
+
+```
+
+```{r load data}
+# Read the preprocessed data from a CSV file
+df <- read.csv('../Data/results/slp_v.csv')
+```
+
+
+```{r cor for slp and v}
+# Extract the relevant columns (slp and v) for analysis
+data <- data.frame(df[,c('slp','v')])
+# Perform bootstrapping to estimate the correlation and its confidence intervals
+b <- boot(data, statistic = corr.stats, R = 1000)  # Perform 1000 bootstrap resamples
+conf.int <- boot.ci(b, type = "basic")[['basic']]  # Calculate the basic confidence interval
+# Calculate the observed correlation between slp and v
+corr.observed <- corr.stats(data, 1:nrow(data))
+# Create a density plot of the bootstrapped correlation statistics
+density_data <- density(data.frame(b$t)$b.t)
+# Plot the bootstrapped correlation distribution with confidence intervals
+ggplot(data.frame(b$t), aes(x = b.t)) +
+  geom_density() +  # Plot the density curve
+  geom_vline(xintercept = 0,  # Add a vertical line at 0 for reference
+             color = "grey",
+             linetype = 2) +
+  geom_area(data = subset(as.data.frame(density_data[c("x", "y")]), x >= conf.int[4] & x <= conf.int[5]),
+            aes(x = x, y = y),  # Highlight the area between the confidence intervals
+            fill = "lightblue", 
+            alpha = 0.5) +
+  theme_bw()  # Use a clean black and white theme
+
+```
+
+
+```{r cor for am and v}
+# Extract the relevant columns (am and v) for analysis
+data <- data.frame(df[,c('am','v')])
+# Perform bootstrapping to estimate the correlation and its confidence intervals
+b <- boot(data, statistic = corr.stats, R = 1000)  # Perform 1000 bootstrap resamples
+conf.int <- boot.ci(b, type = "basic")[['basic']]  # Calculate the basic confidence interval
+# Calculate the observed correlation between am and v
+corr.observed <- corr.stats(data, 1:nrow(data))
+# Create a density plot of the bootstrapped correlation statistics
+density_data <- density(data.frame(b$t)$b.t)
+# Plot the bootstrapped correlation distribution with confidence intervals
+ggplot(data.frame(b$t), aes(x = b.t)) +
+  geom_density() +  # Plot the density curve
+  geom_vline(xintercept = 0,  # Add a vertical line at 0 for reference
+             color = "grey",
+             linetype = 2) +
+  geom_area(data = subset(as.data.frame(density_data[c("x", "y")]), x >= conf.int[4] & x <= conf.int[5]),
+            aes(x = x, y = y),  # Highlight the area between the confidence intervals
+            fill = "lightblue", 
+            alpha = 0.5) +
+  theme_bw()  # Use a clean black and white theme
+
+```
+
+
+```{r cor for pam and v}
+# Extract the relevant columns (pam and v) for analysis
+data <- data.frame(df[,c('pam','v')])
+# Perform bootstrapping to estimate the correlation and its confidence intervals
+b <- boot(data, statistic = corr.stats, R = 1000)  # Perform 1000 bootstrap resamples
+conf.int <- boot.ci(b, type = "basic")[['basic']]  # Calculate the basic confidence interval
+# Calculate the observed correlation between pam and v
+corr.observed <- corr.stats(data, 1:nrow(data))
+# Create a density plot of the bootstrapped correlation statistics
+density_data <- density(data.frame(b$t)$b.t)
+# Plot the bootstrapped correlation distribution with confidence intervals
+ggplot(data.frame(b$t), aes(x = b.t)) +
+  geom_density() +  # Plot the density curve
+  geom_vline(xintercept = 0,  # Add a vertical line at 0 for reference
+             color = "grey",
+             linetype = 2) +
+  geom_area(data = subset(as.data.frame(density_data[c("x", "y")]), x >= conf.int[4] & x <= conf.int[5]),
+            aes(x = x, y = y),  # Highlight the area between the confidence intervals
+            fill = "lightblue", 
+            alpha = 0.5) +
+  theme_bw()  # Use a clean black and white theme
+
+```
+
