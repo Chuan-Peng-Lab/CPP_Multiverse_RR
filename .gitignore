@@ -1,7 +1,7 @@
 *.pdf
 *.xlsx
 *.fif
-
+._*
 
 Data/
 
