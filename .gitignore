@@ -2,7 +2,7 @@
 *.xlsx
 *.fif
 ._*
-
+tempdata/
 Data/
 
 8_Temp/

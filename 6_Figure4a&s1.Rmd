@@ -33,8 +33,8 @@ figure_4a <- ggplot(df_task1_vcoef, aes(x = df_task1_vcoef[, 3])) +
   coord_cartesian(xlim = c(-1, 1)) +
   theme(axis.text = element_text(size = 6),panel.grid = element_blank(),text = element_text(family = 'serif'),panel.spacing = unit(0.1, "cm"))
 # Save Figure 4a as a PDF and png file with dimensions 10x10 cm
-ggsave("../Figure/figure4.a.pdf", width = 10, height = 10, units = "cm")
-ggsave("../Figure/figure4.a.png", width = 10, height = 10, units = "cm")
+# ggsave("../Figure/figure4.a.pdf", width = 10, height = 10, units = "cm")
+# ggsave("../Figure/figure4.a.png", width = 10, height = 10, units = "cm")
 ```
 
 ```{r figure s1}
@@ -45,39 +45,44 @@ df_task1_params_pams <- read.csv('../Data/model_trace/t_pams_traces.csv')
 df_task1_params_slp_bin <- read.csv('../Data/model_trace/t_slp_bin_traces.csv')
 df_task1_params_am_bin <- read.csv('../Data/model_trace/t_am_bin_traces.csv')
 df_task1_params_pam_bin <- read.csv('../Data/model_trace/t_pam_bin_traces.csv')
-df_task1_params_slp_cond <- read.csv('../Data/model_trace/t_slp_cond_traces.csv')
-df_task1_params_am_cond <- read.csv('../Data/model_trace/t_am_cond_traces.csv')
-df_task1_params_pam_cond <- read.csv('../Data/model_trace/t_pam_cond_traces.csv')
+#df_task1_params_slp_cond <- read.csv('../Data/model_trace/t_slp_cond_traces.csv')
+#df_task1_params_am_cond <- read.csv('../Data/model_trace/t_am_cond_traces.csv')
+#df_task1_params_pam_cond <- read.csv('../Data/model_trace/t_pam_cond_traces.csv')
+```
+
+```{r}
 # Select columns containing "v_" while excluding those containing "std" or "sub"
-df_task1_vcoef_slps <- select(df_task1_para_samples_slps,matches("v_"),-matches("std"),-matches("sub"))
+df_task1_vcoef_slps <- select(df_task1_params_slps,matches("v_"),-matches("std"),-matches("sub"))
 df_task1_vcoef_ams <- select(df_task1_params_ams,matches("v_"),-matches("std"),-matches("sub"))
 df_task1_vcoef_pams <- select(df_task1_params_pams,matches("v_"),-matches("std"),-matches("sub"))
 df_task1_vcoef_slp_bin <- select(df_task1_params_slp_bin,matches("v_"),-matches("std"),-matches("sub"))
 df_task1_vcoef_am_bin <- select(df_task1_params_am_bin,matches("v_"),-matches("std"),-matches("sub"))
 df_task1_vcoef_pam_bin <- select(df_task1_params_pam_bin,matches("v_"),-matches("std"),-matches("sub"))
-df_task1_vcoef_slp_cond <- select(df_task1_params_slp_cond,matches("v_"),-matches("std"),-matches("sub"))
-df_task1_vcoef_am_cond <- select(df_task1_params_am_cond,matches("v_"),-matches("std"),-matches("sub"))
-df_task1_vcoef_pam_cond <- select(df_task1_params_pam_cond,matches("v_"),-matches("std"),-matches("sub"))
+#df_task1_vcoef_slp_cond <- select(df_task1_params_slp_cond,matches("v_"),-matches("std"),-matches("sub"))
+#df_task1_vcoef_am_cond <- select(df_task1_params_am_cond,matches("v_"),-matches("std"),-matches("sub"))
+#df_task1_vcoef_pam_cond <- select(df_task1_params_pam_cond,matches("v_"),-matches("std"),-matches("sub"))
 # Create a data frame for density plots with labels for feature type and analysis type
 df_task1_vcoef_density <- data.frame(feature =  factor(c(rep("slp", length(df_task1_vcoef_slps[, 3])),
                                                    rep("slp", length(df_task1_vcoef_slp_bin[, 3])),
-                                                   rep("slp", length(df_task1_vcoef_slp_cond[, 3])),
+                                                   #rep("slp", length(df_task1_vcoef_slp_cond[, 3])),
                                                    rep("am", length(df_task1_vcoef_ams[, 3])),
                                                    rep("am", length(df_task1_vcoef_am_bin[, 3])),
-                                                   rep("am", length(df_task1_vcoef_am_cond[, 3])),
+                                                   #rep("am", length(df_task1_vcoef_am_cond[, 3])),
                                                    rep("pam", length(df_task1_vcoef_pams[, 3])),
-                                                   rep("pam", length(df_task1_vcoef_pam_bin[, 3])),
-                                                   rep("pam", length(df_task1_vcoef_pam_cond[, 3])))),
+                                                   rep("pam", length(df_task1_vcoef_pam_bin[, 3]))
+                                                   #rep("pam", length(df_task1_vcoef_pam_cond[, 3]))
+                                                   )),
                               type = factor(c(rep("trial", length(df_task1_vcoef_slps[, 3])),
                                               rep("bin", length(df_task1_vcoef_slp_bin[, 3])),
-                                              rep("cond", length(df_task1_vcoef_slp_cond[, 3])),
+                                              #rep("cond", length(df_task1_vcoef_slp_cond[, 3])),
                                               rep("trial", length(df_task1_vcoef_ams[, 3])),
                                               rep("bin", length(df_task1_vcoef_am_bin[, 3])),
-                                              rep("cond", length(df_task1_vcoef_am_cond[, 3])),
+                                              #rep("cond", length(df_task1_vcoef_am_cond[, 3])),
                                               rep("trial", length(df_task1_vcoef_pams[, 3])),
-                                              rep("bin", length(df_task1_vcoef_pam_bin[, 3])),
-                                              rep("cond", length(df_task1_vcoef_pam_cond[, 3])))),
-                              vcoef = c(rep(NA, 9*length(df_task1_vcoef_slps[, 3]))))
+                                              rep("bin", length(df_task1_vcoef_pam_bin[, 3]))
+                                              #rep("cond", length(df_task1_vcoef_pam_cond[, 3]))
+                                              )),
+                              vcoef = c(rep(NA, 6*length(df_task1_vcoef_slps[, 3]))))
 # Assign values to the 'v' column based on feature type and analysis type
 df_task1_vcoef_density[df_task1_vcoef_density$feature=='slp'&df_task1_vcoef_density$type=='trial','v']=df_task1_vcoef_slps[, 3]
 df_task1_vcoef_density[df_task1_vcoef_density$feature=='am'&df_task1_vcoef_density$type=='trial','v']=df_task1_vcoef_ams[, 3]
@@ -85,31 +90,215 @@ df_task1_vcoef_density[df_task1_vcoef_density$feature=='pam'&df_task1_vcoef_dens
 df_task1_vcoef_density[df_task1_vcoef_density$feature=='slp'&df_task1_vcoef_density$type=='bin','v']=df_task1_vcoef_slp_bin[, 3]
 df_task1_vcoef_density[df_task1_vcoef_density$feature=='am'&df_task1_vcoef_density$type=='bin','v']=df_task1_vcoef_am_bin[, 3]
 df_task1_vcoef_density[df_task1_vcoef_density$feature=='pam'&df_task1_vcoef_density$type=='bin','v']=df_task1_vcoef_pam_bin[, 3]
-df_task1_vcoef_density[df_task1_vcoef_density$feature=='slp'&df_task1_vcoef_density$type=='cond','v']=df_task1_vcoef_slp_cond[, 3]
-df_task1_vcoef_density[df_task1_vcoef_density$feature=='am'&df_task1_vcoef_density$type=='cond','v']=df_task1_vcoef_am_cond[, 3]
-df_task1_vcoef_density[df_task1_vcoef_density$feature=='pam'&df_task1_vcoef_density$type=='cond','v']=df_task1_vcoef_pam_cond[, 3]
+#df_task1_vcoef_density[df_task1_vcoef_density$feature=='slp'&df_task1_vcoef_density$type=='cond','v']=df_task1_vcoef_slp_cond[, 3]
+#df_task1_vcoef_density[df_task1_vcoef_density$feature=='am'&df_task1_vcoef_density$type=='cond','v']=df_task1_vcoef_am_cond[, 3]
+#df_task1_vcoef_density[df_task1_vcoef_density$feature=='pam'&df_task1_vcoef_density$type=='cond','v']=df_task1_vcoef_pam_cond[, 3]
 # Re-label the 'feature' and 'type' columns for better readability in plots
 df_task1_vcoef_density$feature <- factor(df_task1_vcoef_density$feature, levels = c("slp", "am", "pam"),labels = c("Build-up rate", "Amplitude", "Peak amplitude"))
-df_task1_vcoef_density$type <- factor(df_task1_vcoef_density$type, levels = c("trial", "bin", "cond"),labels = c("Trial", "bin", "Condition"))
+df_task1_vcoef_density$type <- factor(df_task1_vcoef_density$type, levels = c("trial", "bin"),labels = c("Trial", "bin"))
 # Aggregate data by type and feature, calculate averages, and prepare for plotting
 df_task1_vcoef_density_agg <- df_task1_vcoef_density %>% group_by(type,feature) %>% summarise(avg_v = mean(v)) %>% left_join(df_task1_vcoef_density, by = c("type","feature")) %>% mutate(pipeline = factor(paste(type, feature, sep = "-")))
 df_task1_vcoef_density_agg$pipeline <- factor(df_task1_vcoef_density_agg$pipeline,levels = unique(df_task1_vcoef_density_agg$pipeline))
 # Calculate the 2.5th and 97.5th percentiles, as well as the mean for each pipeline
 df_task1_vcoef_density_stats <- df_task1_vcoef_density_agg %>% group_by(pipeline) %>% summarise(percentile_2.5 = quantile(v, 0.025), percentile_97.5 = quantile(v, 0.975), mean = mean(v)) %>% arrange(mean) %>% ungroup() %>% mutate(pipeline = factor(pipeline))
-# Plot the density distributions for each pipeline with markers for the percentiles and mean
-figure_s1 <-ggplot(df_task1_vcoef_density_agg, aes(x = v)) +
-            geom_density() +
-            geom_segment(data = df_task1_vcoef_density_stats, aes(x = percentile_2.5, y = 0, xend = percentile_97.5, yend = 0), linewidth=2, color = "lightblue")+
-            geom_point(data = df_task1_vcoef_density_stats, aes(x = mean, y = 0), size=1, color = "black")+
-            facet_grid(rows = vars(pipeline), scales = "free", switch = "y",) +
-            geom_vline(xintercept = 0, color = "gray")+
-            labs(y='Posterior probability', x = 'Coefficient of CPP effect on drift rate')+
-            theme_bw() +
-            coord_cartesian(xlim = c(-2, 2))+
-            theme(axis.text = element_text(size = 8), panel.grid = element_blank(), text = element_text(family = 'serif'), panel.spacing = unit(0.1, "cm"), strip.text.y = element_blank())
-# Save the plot as PDF and PNG with specified dimensions
-ggsave("../Figure/figure_s1.pdf", width = 10, height = 10, units = "cm")
-ggsave("../Figure/figure_s1.png", width = 10, height = 10, units = "cm")
 
+# Create label data
+# This code creates a data frame named 'pipeline_labels' that contains unique pipeline names from another data frame
+# and corresponding custom labels. These labels will be used to annotate the plot later.
+pipeline_labels <- data.frame(
+  pipeline = unique(df_task1_vcoef_density_agg$pipeline),
+  label = c('Trialwise Build-up rate',
+            'Trialwise Amplitude',
+            'Trialwise Peak amplitude',
+            'Binwise Build-up rate',
+            'Binwise Amplitude',
+            'Binwise Peak amplitude')
+)
+
+# Create a ggplot object named 'figure_s1'
+# This plot visualizes the density of the variable 'v' from the data frame 'df_task1_vcoef_density_agg'.
+# It also adds some statistical elements and customizes the appearance of the plot.
+figure_s1 <- ggplot(df_task1_vcoef_density_agg, aes(x = v)) +
+  # Add a density plot layer
+  geom_density() +
+  # Add a horizontal segment representing the 2.5th to 97.5th percentiles
+  geom_segment(
+    data = df_task1_vcoef_density_stats,
+    aes(x = percentile_2.5, y = 0, xend = percentile_97.5, yend = 0),
+    linewidth = 2, color = "lightblue"
+  ) +
+  # Add a point representing the mean value
+  geom_point(
+    data = df_task1_vcoef_density_stats,
+    aes(x = mean, y = 0), size = 1, color = "black"
+  ) +
+  # Create a grid of sub - plots based on the 'pipeline' variable
+  # Each sub - plot has its own scale and the y - axis label is switched to the left
+  facet_grid(rows = vars(pipeline), scales = "free", switch = "y") +
+  # Add a vertical line at x = 0
+  geom_vline(xintercept = 0, color = "gray") +
+  # Set the labels for the x and y axes
+  labs(y = 'Posterior probability', x = 'Coefficient of CPP effect on drift rate') +
+  # Apply a black - and - white theme to the plot
+  theme_bw() +
+  # Set the x - axis limits and turn off clipping
+  coord_cartesian(xlim = c(-1, 1), clip = "off") +  
+  # Customize the theme elements
+  theme(
+    axis.text = element_text(size = 8),
+    panel.grid = element_blank(),
+    text = element_text(family = 'serif'),
+    panel.spacing = unit(0.2, "cm"),  # Increase the spacing between facets
+    strip.text.y = element_blank(),
+    strip.placement = "outside",
+    strip.background = element_blank(),
+    plot.margin = margin(r = 200)  # Leave blank space on the right side of the plot
+  ) +
+  # Add text annotations using the 'pipeline_labels' data frame
+  geom_text(
+    data = pipeline_labels,
+    aes(x = Inf, y = 0, label = label),
+    hjust = -0.1,  # Move the text to the right
+    vjust = -2,    # Fine - tune the text position downward
+    size = 4,
+    color = "black",
+    family = 'serif'
+  )
+
+# Print the plot
+print(figure_s1)
+print(df_task1_vcoef_density_stats)
+# Save the plot as PDF and PNG with specified dimensions
+# These lines are currently commented out. Uncomment them to save the plot in the specified formats and dimensions.
+# ggsave("./Figure/figure_s1.pdf", width = 10, height = 10, units = "cm")
+# ggsave("./Figure/figure_s1.png", width = 10, height = 10, units = "cm")
 ```
 
+
+```{r}
+
+# Select columns containing "v_" while excluding those containing "std" or "sub"
+df_task1_vcoef_slps <- select(df_task1_params_slps,matches("v_"),-matches("std"),-matches("sub"))
+df_task1_vcoef_ams <- select(df_task1_params_ams,matches("v_"),-matches("std"),-matches("sub"))
+df_task1_vcoef_pams <- select(df_task1_params_pams,matches("v_"),-matches("std"),-matches("sub"))
+df_task1_vcoef_slp_bin <- select(df_task1_params_slp_bin,matches("v_"),-matches("std"),-matches("sub"))
+df_task1_vcoef_am_bin <- select(df_task1_params_am_bin,matches("v_"),-matches("std"),-matches("sub"))
+df_task1_vcoef_pam_bin <- select(df_task1_params_pam_bin,matches("v_"),-matches("std"),-matches("sub"))
+#df_task1_vcoef_slp_cond <- select(df_task1_params_slp_cond,matches("v_"),-matches("std"),-matches("sub"))
+#df_task1_vcoef_am_cond <- select(df_task1_params_am_cond,matches("v_"),-matches("std"),-matches("sub"))
+#df_task1_vcoef_pam_cond <- select(df_task1_params_pam_cond,matches("v_"),-matches("std"),-matches("sub"))
+# Create a data frame for density plots with labels for feature type and analysis type
+df_task1_vcoef_density <- data.frame(feature =  factor(c(rep("slp", length(df_task1_vcoef_slps[, 4])),
+                                                   rep("slp", length(df_task1_vcoef_slp_bin[, 4])),
+                                                   #rep("slp", length(df_task1_vcoef_slp_cond[, 4])),
+                                                   rep("am", length(df_task1_vcoef_ams[, 4])),
+                                                   rep("am", length(df_task1_vcoef_am_bin[, 4])),
+                                                   #rep("am", length(df_task1_vcoef_am_cond[, 3])),
+                                                   rep("pam", length(df_task1_vcoef_pams[, 4])),
+                                                   rep("pam", length(df_task1_vcoef_pam_bin[, 4]))
+                                                   #rep("pam", length(df_task1_vcoef_pam_cond[, 3]))
+                                                   )),
+                              type = factor(c(rep("trial", length(df_task1_vcoef_slps[, 4])),
+                                              rep("bin", length(df_task1_vcoef_slp_bin[, 4])),
+                                              #rep("cond", length(df_task1_vcoef_slp_cond[, 3])),
+                                              rep("trial", length(df_task1_vcoef_ams[, 4])),
+                                              rep("bin", length(df_task1_vcoef_am_bin[, 4])),
+                                              #rep("cond", length(df_task1_vcoef_am_cond[, 3])),
+                                              rep("trial", length(df_task1_vcoef_pams[, 4])),
+                                              rep("bin", length(df_task1_vcoef_pam_bin[, 4]))
+                                              #rep("cond", length(df_task1_vcoef_pam_cond[, 3]))
+                                              )),
+                              vcoef = c(rep(NA, 6*length(df_task1_vcoef_slps[, 4]))))
+# Assign values to the 'v' column based on feature type and analysis type
+df_task1_vcoef_density[df_task1_vcoef_density$feature=='slp'&df_task1_vcoef_density$type=='trial','v']=df_task1_vcoef_slps[, 4]
+df_task1_vcoef_density[df_task1_vcoef_density$feature=='am'&df_task1_vcoef_density$type=='trial','v']=df_task1_vcoef_ams[, 4]
+df_task1_vcoef_density[df_task1_vcoef_density$feature=='pam'&df_task1_vcoef_density$type=='trial','v']=df_task1_vcoef_pams[, 4]
+df_task1_vcoef_density[df_task1_vcoef_density$feature=='slp'&df_task1_vcoef_density$type=='bin','v']=df_task1_vcoef_slp_bin[, 4]
+df_task1_vcoef_density[df_task1_vcoef_density$feature=='am'&df_task1_vcoef_density$type=='bin','v']=df_task1_vcoef_am_bin[, 4]
+df_task1_vcoef_density[df_task1_vcoef_density$feature=='pam'&df_task1_vcoef_density$type=='bin','v']=df_task1_vcoef_pam_bin[, 4]
+#df_task1_vcoef_density[df_task1_vcoef_density$feature=='slp'&df_task1_vcoef_density$type=='cond','v']=df_task1_vcoef_slp_cond[, 3]
+#df_task1_vcoef_density[df_task1_vcoef_density$feature=='am'&df_task1_vcoef_density$type=='cond','v']=df_task1_vcoef_am_cond[, 3]
+#df_task1_vcoef_density[df_task1_vcoef_density$feature=='pam'&df_task1_vcoef_density$type=='cond','v']=df_task1_vcoef_pam_cond[, 3]
+# Re-label the 'feature' and 'type' columns for better readability in plots
+df_task1_vcoef_density$feature <- factor(df_task1_vcoef_density$feature, levels = c("slp", "am", "pam"),labels = c("Build-up rate", "Amplitude", "Peak amplitude"))
+df_task1_vcoef_density$type <- factor(df_task1_vcoef_density$type, levels = c("trial", "bin"),labels = c("Trial", "bin"))
+# Aggregate data by type and feature, calculate averages, and prepare for plotting
+df_task1_vcoef_density_agg <- df_task1_vcoef_density %>% group_by(type,feature) %>% summarise(avg_v = mean(v)) %>% left_join(df_task1_vcoef_density, by = c("type","feature")) %>% mutate(pipeline = factor(paste(type, feature, sep = "-")))
+df_task1_vcoef_density_agg$pipeline <- factor(df_task1_vcoef_density_agg$pipeline,levels = unique(df_task1_vcoef_density_agg$pipeline))
+# Calculate the 2.5th and 97.5th percentiles, as well as the mean for each pipeline
+df_task1_vcoef_density_stats <- df_task1_vcoef_density_agg %>% group_by(pipeline) %>% summarise(percentile_2.5 = quantile(v, 0.025), percentile_97.5 = quantile(v, 0.975), mean = mean(v)) %>% arrange(mean) %>% ungroup() %>% mutate(pipeline = factor(pipeline))
+
+# Create label data
+# This code creates a data frame named 'pipeline_labels' that contains unique pipeline names from another data frame
+# and corresponding custom labels. These labels will be used to annotate the plot later.
+pipeline_labels <- data.frame(
+  pipeline = unique(df_task1_vcoef_density_agg$pipeline),
+  label = c('Trialwise Build-up rate',
+            'Trialwise Amplitude',
+            'Trialwise Peak amplitude',
+            'Binwise Build-up rate',
+            'Binwise Amplitude',
+            'Binwise Peak amplitude')
+)
+
+# Create a ggplot object named 'figure_s1'
+# This plot visualizes the density of the variable 'v' from the data frame 'df_task1_vcoef_density_agg'.
+# It also adds some statistical elements and customizes the appearance of the plot.
+figure_s1 <- ggplot(df_task1_vcoef_density_agg, aes(x = v)) +
+  # Add a density plot layer
+  geom_density() +
+  # Add a horizontal segment representing the 2.5th to 97.5th percentiles
+  geom_segment(
+    data = df_task1_vcoef_density_stats,
+    aes(x = percentile_2.5, y = 0, xend = percentile_97.5, yend = 0),
+    linewidth = 2, color = "pink"
+  ) +
+  # Add a point representing the mean value
+  geom_point(
+    data = df_task1_vcoef_density_stats,
+    aes(x = mean, y = 0), size = 1, color = "black"
+  ) +
+  # Create a grid of sub-plots based on the 'pipeline' variable
+  facet_grid(rows = vars(pipeline), scales = "free", switch = "y") +
+  # Add a vertical line at x = 0
+  geom_vline(xintercept = 0, color = "gray") +
+  # Set the labels for the x and y axes
+  labs(y = 'Posterior probability', x = 'Coefficient of interaction effect on drift rate') +
+  # Apply a black-and-white theme to the plot
+  theme_bw() +
+  # Set the x-axis limits and turn off clipping
+  coord_cartesian(xlim = c(-1, 1), clip = "off") +  
+
+  # Add text annotations using the 'pipeline_labels' data frame
+  geom_text(
+    data = pipeline_labels,
+    aes(x = Inf, y = 0, label = label),  # 定位到右侧边缘
+    hjust = -0.05,        # 向左微调（负值向右，正值向左）
+    vjust = -2,         # 垂直居中调整
+    size = 4,
+    color = "black",
+    family = 'serif',
+    check_overlap = TRUE # 避免标签重叠
+  ) +
+  
+  # Customize the theme elements
+  theme(
+    plot.margin = margin(t = 20, r = 200, b = 20, l = 20),  # 右侧留足空间
+    axis.text = element_text(size = 8),
+    panel.grid = element_blank(),
+    text = element_text(family = 'serif'),
+    panel.spacing = unit(0.2, "cm"),
+    strip.text.y = element_blank(),
+    strip.placement = "outside",
+    strip.background = element_blank()
+  )
+
+# Print the plot
+print(figure_s1)
+print(df_task1_vcoef_density_stats)
+
+# Save the plot as PDF and PNG with specified dimensions
+# Uncomment these lines to save the plot in the specified formats and dimensions.
+# ggsave("./Figure/figure_s1.pdf", width = 10, height = 10, units = "cm")
+# ggsave("./Figure/figure_s1.png", width = 10, height = 10, units = "cm")
+```
