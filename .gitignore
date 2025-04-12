@@ -2,8 +2,5 @@
 *.xlsx
 *.fif
 ._*
-tempdata/
-Data/
-
-8_Temp/
-6_Report/2023_Macau_CCBC/
+Multiverse_Model_Data/
+Sentivity_Model_Data/

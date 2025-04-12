@@ -332,8 +332,8 @@ def smooth(x):
 
 def add_feature(x,x2):
     x2['pam'] = x.loc[:,round((-0.05+3)*512):round((0.05+3)*512)].mean(axis=1)
-    x2['slp'] = x2.loc[:, round((-0.18+3)*512):round((-0.1+3)*512)].apply(lambda x: np.polyfit(range(np.shape(x)[0]), x, 1)[0],axis=1)
-    x2['am'] = x.loc[:,round((-0.18+3)*512):round((-0.1+3)*512)].mean(axis=1)
+    x2['slp'] = x2.loc[:, round((-0.18+3)*512):round((-0.08+3)*512)].apply(lambda x: np.polyfit(range(np.shape(x)[0]), x, 1)[0],axis=1)
+    x2['am'] = x.loc[:,round((-0.18+3)*512):round((-0.08+3)*512)].mean(axis=1)
     x2['pkl'] = x2.rt + ((x2.loc[:,round((-0.1+3)*512):round((0.1+3)*512)].apply(lambda x: np.argmax(x),axis=1)+round((-0.1+3)*512))/512-3)
     # calculate the quantile of each subject
     x2.insert(loc=2, column='slp_quantile', value=x2.groupby(['subj_idx','coherence']).slp.apply(lambda x: pd.qcut(x, q=4, labels=['1st','2nd','3rd','4th'])))
