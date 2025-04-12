@@ -1,4 +1,4 @@
-CPP Multiverse Project - Stage 1 Registered Report
+# CPP Multiverse Project - Stage 1 Registered Report
 
 The stage 1 pre-registered report can be found in OSF：
 https://osf.io/9ygx6/
@@ -20,6 +20,3 @@ Multiverse_Model_Data: Temp results of running DDM of multiverse CPP
 Sentivity_Model_Data: Temp results of running DDM of sensitivity analysis
 
 
-
-
-Please cite the Registered Report when referencing this work. Citation format will be updated upon publication.
